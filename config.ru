@@ -2,4 +2,4 @@ require './config/environment'
 
 
 
-run Application_controller
+run ApplicationController

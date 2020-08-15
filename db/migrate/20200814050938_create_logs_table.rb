@@ -5,5 +5,6 @@ class CreateLogsTable < ActiveRecord::Migration[5.2]
       t.integer :plant_id
       t.string :condition_update
       t.string :watered_date
+    end
   end
 end

@@ -10,13 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_14_041745) do
+ActiveRecord::Schema.define(version: 2020_08_15_044438) do
+
+  create_table "logs", force: :cascade do |t|
+    t.text "content"
+    t.integer "plant_id"
+    t.string "condition_update"
+    t.string "watered_date"
+    t.integer "owner_id"
+  end
 
   create_table "plants", force: :cascade do |t|
     t.string "common_name"
     t.string "nickname"
     t.string "plant_type"
-    t.string "last_watering_date"
+  end
+
+  create_table "tips", force: :cascade do |t|
+    t.text "content"
+    t.string "plant_type"
+    t.string "care_category"
   end
 
   create_table "users", force: :cascade do |t|
