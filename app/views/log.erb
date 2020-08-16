@@ -1,0 +1,17 @@
+<h1>Still thinking about this</h1>
+
+
+
+<form action="/plant/log" method="POST">
+<select name="condition_update" id="condition_update" placeholder="Current Condition">
+<%@conditons.each do |state|%>
+<option value="<%=state%>"><%=state%></option>
+<%end%>
+</select>
+
+<input type='textarea' name="content" placeholder="Document any care changes & result(s)">
+<input type="text" name="watered_date" placeholder="Last Watering Date">
+<input type="submit" value="Submit Log">
+</form>
+
+

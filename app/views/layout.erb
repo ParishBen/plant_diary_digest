@@ -5,5 +5,9 @@
 </head>
 <body>
 <%=yield%>
+<footer><%if logged_in?%>
+<p><a href="/logout">Log Out</a></p>
+<%end%>
+</footer>
 </body>
 </html>
