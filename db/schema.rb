@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_15_230813) do
+ActiveRecord::Schema.define(version: 2020_08_16_075402) do
 
   create_table "logs", force: :cascade do |t|
     t.text "content"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2020_08_15_230813) do
     t.string "common_name"
     t.string "nickname"
     t.string "plant_type"
-    t.integer "owner_id"
+    t.integer "user_id"
   end
 
   create_table "tips", force: :cascade do |t|

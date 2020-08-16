@@ -1,0 +1,16 @@
+<h1>Welcome, <%=current_user.name%></h1>
+<br>
+
+<h2>Your Plants:</h2>
+<ul><%current_user.plants.each do |plant|%>
+<li><a href="/plant/log"><%=plant.nickname%></a></li>
+
+    <%end%></ul>
+
+<h2>Your Tips:</h2>
+
+<br>
+<br>
+<h3><a href='/home'>Home Feed</a></h3>
+<h3><a href='/plant/new'>New Plant</a></h3>
+<h3><a href='/tip/new'>New Tip</a></h3>

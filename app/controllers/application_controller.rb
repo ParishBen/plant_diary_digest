@@ -2,7 +2,7 @@ require_relative '../../config/environment'
 class ApplicationController < Sinatra::Base
   configure do
     set :views, "app/views/"
-    enable :sessions unless test?
+    enable :sessions 
     set :session_secret, "secret"
   end
  
@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
 
   post '/signup' do
     user= User.new(:name=> params[:name], :username=> params[:username], :password=> params[:password])
-    if !(user.name && user.username && user.password).empty?
+    if !params[:name].empty?  && !params[:username].empty? && !params[:password].empty?
       user.save
       redirect '/login' 
   else 
@@ -33,16 +33,33 @@ end
   end
 
   post '/login' do
-    user= User.find_by(:username=> params[:username])
-    if user && user.authenticate(params[:password])
-      redirect '/account'
+    @user= User.find_by(:username=> params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      erb :account
     else
       redirect '/failure'
     end
   end
   
-  get '/account' do
-    "You're in your account!"
+  get "/logout" do
+		session.clear
+		redirect "/"
+	end
+ 
+
+
+  helpers do
+		def logged_in?
+			!!session[:user_id]
+		end
+
+		def current_user
+			User.find(session[:user_id])
+    end
   end
+
+  
+
 end
 #Proc.new { File.join(root, "../views/") }
