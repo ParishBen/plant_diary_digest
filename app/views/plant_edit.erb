@@ -1,0 +1,8 @@
+<form action="/plant/<%=@plant.id%>"  method="post">
+<input type="hidden" name="_method" value="patch">
+
+<input type = "text" name="plant[common_name]" value= "<%=@plant.common_name%>" />
+<input type = "text" name="plant[nickname]" value = "<%=@plant.nickname%>"/>
+<input type = "text" name="plant[plant_type]" value = "<%=@plant.plant_type%>"/>
+<input type= "submit" value="update"/>
+</form>

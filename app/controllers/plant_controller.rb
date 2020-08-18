@@ -18,5 +18,36 @@ class PlantController < ApplicationController
     get '/plant_failure' do
     erb :plant_failure
     end
+    
+    get '/plants' do
+        erb :account
+    end
 
+    get '/plant/:id' do 
+        @plant = Plant.find_by(:id=>params[:id])
+        
+        erb :plant_show
+    end
+
+    get '/plant/:id/edit' do
+        @plant = Plant.find(params[:id])
+        erb :plant_edit
+    end
+
+    patch '/plant/:id' do
+        @plant = Plant.find(params[:id])
+        @plant.update(params[:plant])
+        redirect to "/plants"
+    end
+    
+    get '/plant/:id/delete' do
+        @plant = Plant.find(params[:id])
+        erb :delete_plant
+        
+    end
+    delete "/plant/:id" do
+        Plant.destroy(params[:id])
+        
+        redirect to "/plants"
+      end
 end

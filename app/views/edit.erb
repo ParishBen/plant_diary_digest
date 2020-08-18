@@ -1,0 +1,16 @@
+<h1>Edit <%=@plant.nickname%>'s Log </h1>
+
+<form action="/log/<%=@log.id%>" method="post">
+ <input type="hidden" name="_method" value="patch">
+
+
+<select name="log[condition_update]" id="log[condition_update]" value="<%=@log.condition_update%>">
+<%@conditions.each do |state|%>
+<option value="<%=state%>"><%=state%></option>
+<%end%>
+</select>
+
+<textarea type="text" name="log[content]" placeholder="Document any care changes & result(s)" value="<%=@log.content%>" ></textarea>
+<input type="text" name="log[watered_date]" placeholder="Last Watering Date" value= "<%= @log.watered_date %>">
+<input type="submit" value="Update Log">
+</form>

@@ -12,7 +12,7 @@ gem "shotgun", "~> 0.9.2"
 
 gem "pry", "~> 0.13.1"
 
-gem "activerecord", "~> 5.2", require: 'active_record'
+gem "activerecord", "~> 5.2", :require => 'active_record'
 
 gem "sinatra", "~> 2.0"
 

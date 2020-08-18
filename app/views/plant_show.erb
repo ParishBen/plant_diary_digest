@@ -1,0 +1,8 @@
+<h1><%=@plant.nickname%>'s Diary</h1>
+
+<h2>Care Chronicles:</h2>
+<ul><%if @plant.logs%>
+<%@plant.logs.each do |log|%>
+<h4><li>Just Watered On: <%=log.watered_date%>--Updated Condition: <%=log.condition_update%> --Any Care Changes to Document:<%=log.content%>--<a href="/log/<%=log.id%>/edit">Edit Log</a>--<a href="/log/<%=log.id%>">Delete Log</a></li></h4></ul>
+<%end%><%end%>
+<h4><a href="/plant/log/new">Add a Log</a></h4>

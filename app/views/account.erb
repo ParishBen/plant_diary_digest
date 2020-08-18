@@ -3,7 +3,7 @@
 
 <h2>Your Plants:</h2>
 <ul><%current_user.plants.each do |plant|%>
-<li><a href="/plant/log/<%=plant.id%>"><%=plant.nickname%></a></li>
+<li><a href="/plant/<%=plant.id%>"><%=plant.nickname%></a> || <a href="/plant/<%=plant.id%>/edit">Edit Plant</a> || <a href= "/plant/<%=plant.id%>/delete">Delete Plant</a></li>
 
     <%end%></ul>
 

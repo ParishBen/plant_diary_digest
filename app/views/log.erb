@@ -2,9 +2,19 @@
 
 
 
-<form action="/plant/log" method="POST">
+<form action="/plant/logs" method="POST">
+<select name= "user_plant" id="user_plant">
+
+<%if current_user.plants
+current_user.plants.each do|plant|%>
+
+
+<option value="<%=plant.id%>"><%=plant.nickname%></option>
+<%end%><%end%>
+</select>
+
 <select name="condition_update" id="condition_update" placeholder="Current Condition">
-<%@conditons.each do |state|%>
+<%@conditions.each do |state|%>
 <option value="<%=state%>"><%=state%></option>
 <%end%>
 </select>

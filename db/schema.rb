@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_16_075402) do
+ActiveRecord::Schema.define(version: 2020_08_17_031432) do
 
   create_table "logs", force: :cascade do |t|
     t.text "content"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_08_16_075402) do
     t.text "content"
     t.string "plant_type"
     t.string "care_category"
-    t.integer "owner_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
