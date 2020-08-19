@@ -1,6 +1,6 @@
 <h1>HOME FEED</h1>
 
-<h3>Here's how everyone's plants are doing...</h3>
+<h3>Here's how everyone's plants are doing...</h3><br><br>
 <%if @users%>
 <%@users.each do |user|%>
 <%if user.plants%>
@@ -24,12 +24,12 @@
 <%@users.each do |user|%>
 <%if user.tips%>
 <%user.tips.each do |tip|%>
-<%#@tips.each do |tip|%>
+
 
 <ul>
-<h4><li>Plant Type: <%=tip.plant_type%> ~~ Tip: <%=tip.content%>~~<a href="/user/<%=user.id%>"><%=user.username%></li></h4></ul> 
+<h4><li>Plant Type: <%=tip.plant_type%> ~~ Tip: <%=tip.content%>~~ <a href="/user/<%=user.id%>"> <%=user.username%></a></li></h4></ul> 
 <%end%>
 <%end%>
 <%end%>
 <%end%>
-
+<h4><a href="/account">Your Profile Home</a></h4>

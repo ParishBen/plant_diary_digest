@@ -34,7 +34,14 @@ class PlantController < ApplicationController
     end
     get '/plant/:id/edit' do
         @plant = Plant.find(params[:id])
+        @plants = current_user.plants
+        if @plants.find_by(:id=>@plant.id)
         erb :plant_edit
+        elsif logged_in?
+            redirect to '/account'
+        else
+            redirect '/'
+        end
     end
 
     patch '/plant/:id' do
@@ -45,12 +52,21 @@ class PlantController < ApplicationController
     
     get '/plant/:id/delete' do
         @plant = Plant.find(params[:id])
+        @plants = current_user.plants
+        if @plants.find_by(:id=>@plant.id)
         erb :delete_plant
-        
+    elsif logged_in?
+        redirect to '/account'
+    else 
+        redirect to '/'
+     end
     end
+   
+
+
+
     delete "/plant/:id" do
         Plant.destroy(params[:id])
-        
         redirect to "/plants"
       end
 end

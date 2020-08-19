@@ -1,0 +1,6 @@
+<h1>Delete that Tip</h1>
+
+<form method="post" action="/tip/<%= @tip.id %>">
+  <input type="hidden" name="_method" value="delete" />
+  <input type="submit" value="Delete" />
+</form>

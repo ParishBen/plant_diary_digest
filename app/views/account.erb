@@ -10,8 +10,9 @@
 <br>
 <h2> Your Tips</h2>
 <%if current_user.tips%>
-<ul><%current_user.tips.each do |tip|%>
-<li>For a <%=tip.plant_type%>:  <%=tip.content%></li></ul>
+<%current_user.tips.each do |tip|%>
+<ul>
+<li>For a <%=tip.plant_type%>:  <%=tip.content%> ||<a href="/tip/<%=tip.id%>/edit">Edit</a> || <a href="/tip/<%=tip.id%>/delete">Delete Tip</a></li></ul>
 <%end%>
 <%end%>
 <br>
