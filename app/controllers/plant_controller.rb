@@ -9,7 +9,7 @@ class PlantController < ApplicationController
     if !params[:nickname].empty?
         @plant.user_id = current_user.id
         @plant.save
-        erb :account
+        redirect to '/account'
     else 
         redirect '/plant_failure'
          end 
@@ -24,11 +24,14 @@ class PlantController < ApplicationController
     end
 
     get '/plant/:id' do 
-        @plant = Plant.find_by(:id=>params[:id])
-        
+        @plant = Plant.find(params[:id])
+        @plants= current_user.plants
+        if @plants.find_by(:id=>@plant.id)
         erb :plant_show
+        else
+            erb :other_show
+        end
     end
-
     get '/plant/:id/edit' do
         @plant = Plant.find(params[:id])
         erb :plant_edit

@@ -1,0 +1,19 @@
+<h1>Welcome, <%=current_user.name%></h1>
+<br>
+
+<h2><%=@user.username%> Plants:</h2>
+<ul><%@user.plants.each do |plant|%>
+<li><a href="/plant/<%=plant.id%>"><%=plant.nickname.capitalize%></a> The <%=plant.common_name%>
+
+    <%end%></ul>
+<h3><%=@user.username%> Tips:</h3>
+<ul><%@user.tips.each do |tip|%>
+<li>For a <%=tip.plant_type%>:  <%=tip.content%></li>
+<%end%></ul>
+
+
+<br>
+<br>
+
+<h3><a href='/home'>Home Feed</a></h3>
+<h3><a href='/account'>Back to Your Account</a></h3>

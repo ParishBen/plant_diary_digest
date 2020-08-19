@@ -1,0 +1,17 @@
+<h1><%if @plant.nickname.ends_with?("s")%> <%=@plant.nickname.to_s.capitalize%>' Diary <%else%> <%=@plant.nickname.to_s.capitalize%>'s Diary</h1><%end%>
+<br>
+<br>
+
+<h2>Care Chronicles:</h2>
+<ul><%if @plant.logs%>
+<%@plant.logs.each do |log|%>
+
+ <h4><li> Watered On~ <%=log.watered_date%>--Updated Condition: <%=log.condition_update%> --Noteworthy Care Changes:<%=log.content%>
+</li></h4></ul>
+   <%end%>
+  <%end%>
+
+<br>
+<h4><a href="/home"> Home Feed</a></h4>
+
+<h4><a href="/account">Your Profile Home</a></h4>

@@ -1,14 +1,18 @@
 class LogController < ApplicationController
    
     get '/plant/log/new' do
+        @user = current_user
+        
         @conditions = ["Dead", "Far Worse", "Slightly Worse", "About the Same", "Slightly Livelier", "Much Healthier", "Healthiest Yet!"]
-        
-    erb :log
+        if @user
+        erb :log
+        else :failure
+        end
     end
-        
     
         post '/plant/logs' do 
             @plant = Plant.find_by(:id=>params["user_plant"])
+            
             @log= Log.new(:watered_date => params[:watered_date], :condition_update=> params[:condition_update], :content=> params[:content]) 
             if !params[:condition_update].empty? && !params[:content].empty? && !params[:watered_date].empty?
                 @log.plant_id= @plant.id
@@ -42,6 +46,7 @@ class LogController < ApplicationController
            
            get '/log/:id' do
            @log = Log.find(params[:id])
+           @plant = Plant.find(@log[:plant_id])
            erb :delete
            end
            
@@ -59,8 +64,6 @@ class LogController < ApplicationController
             redirect to "/plant/#{@plant.id}"
            end
 
-        get '/home' do
-            erb :home
-        end
+        
 
 end

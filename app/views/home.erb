@@ -1,4 +1,35 @@
 <h1>HOME FEED</h1>
 
-<h3>All Watering Logs</h3>
-<h4>All Tips</h4>
+<h3>Here's how everyone's plants are doing...</h3>
+<%if @users%>
+<%@users.each do |user|%>
+<%if user.plants%>
+<%user.plants.each do |plant|%>
+<%if plant.logs%>
+<%plant.logs.each do |log|%>
+<ul>
+ <h4><li><%=plant.nickname%> ~ Watered On ~ <%=log.watered_date%>--Updated Condition: <%=log.condition_update%> --Noteworthy Care Changes:<%=log.content%>
+~~By: <a href="/user/<%=user.id%>"><%=user.username%></a></li></h4></ul>
+   <%end%>
+  <%end%>
+  <%end%>
+  <%end%>
+  <%end%>
+  <%end%>
+<h4>Here's Tips From the Community</h4>
+
+
+
+<%if @users%>
+<%@users.each do |user|%>
+<%if user.tips%>
+<%user.tips.each do |tip|%>
+<%#@tips.each do |tip|%>
+
+<ul>
+<h4><li>Plant Type: <%=tip.plant_type%> ~~ Tip: <%=tip.content%>~~<a href="/user/<%=user.id%>"><%=user.username%></li></h4></ul> 
+<%end%>
+<%end%>
+<%end%>
+<%end%>
+

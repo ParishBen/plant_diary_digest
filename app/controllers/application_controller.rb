@@ -36,10 +36,14 @@ end
     @user= User.find_by(:username=> params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      erb :account
+      redirect to '/account'
     else
       redirect '/failure'
     end
+  end
+  
+  get '/account' do
+    erb :account
   end
   
   get "/logout" do
@@ -47,7 +51,13 @@ end
 		redirect "/"
 	end
  
-
+  get "/home" do
+    @users = User.all
+    @tips = Tip.all
+    
+    erb :home
+    
+  end
 
   helpers do
 		def logged_in?
