@@ -45,23 +45,29 @@ end
     end
 end
     get '/plant/:id/edit' do
-        if !logged_in?
+    if
+        !logged_in?
             redirect to '/'
-        elsif @plant = Plant.find(params[:id])
+    elsif
+        @plant = Plant.find(params[:id])
         @plants = current_user.plants
         if @plants.find_by(:id=>@plant.id)
-        erb :plant_edit
-        else
-            redirect to '/account'
+            erb :plant_edit
+            else
+                redirect to '/account'
             end
         end
     end
 
     patch '/plant/:id' do
         @plant = Plant.find(params[:id])
+        if !params[:plant].values.any?{|v| v.empty?}
         @plant.update(params[:plant])
         redirect to "/plants"
+    else
+        erb :plant_failure
     end
+end
     
     get '/plant/:id/delete' do
         if !logged_in?

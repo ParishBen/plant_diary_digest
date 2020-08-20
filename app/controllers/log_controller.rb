@@ -50,14 +50,19 @@ end
 
            @log = Log.find(params[:id])
            @plant = Plant.find(@log[:plant_id])
-           if !params[:log].empty?
-           @log.update(params[:log])  
            
-           redirect "/plant/log/#{ @plant.id}"
-           else redirect to "/log/#{@log.id}/edit"
+           if !params[:log].values.any?{|v| v.empty?} 
+           
+            @log.update(params[:log])  
+           
+           redirect to "/plant/log/#{ @plant.id}"
+           
+        else
+             erb :log_edit_fail
+             
            end
         end
-           
+    
            get '/log/:id' do
             if !logged_in?
                 redirect to '/'

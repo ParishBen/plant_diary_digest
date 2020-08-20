@@ -23,22 +23,31 @@ get '/tip/new' do
   end
 
   get '/tip/:id/edit' do
+    if !logged_in?
+      erb :failure
+    elsif
     @tip = Tip.find(params[:id])
     @tips = current_user.tips
-    if  @tips.find_by(:id=>@tip.id)
-         erb :tip_edit
-    elsif logged_in? 
-            redirect to '/account'
+    if  !@tips.find_by(:id=>@tip.id)
+      redirect '/account'
     else
-        erb :failure
+     
+      erb :tip_edit
+    end
    end
   end
 
   patch '/tip/:id' do
     @tip = Tip.find(params[:id])
+    if !params[:tip].values.any?{|v| v.empty?} 
     @tip.update(params[:tip])
     redirect to '/account'
+  
+    else erb :tip_failure
   end
+end
+
+
 
   get '/tip/:id/delete' do
     @tip = Tip.find(params[:id])
