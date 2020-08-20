@@ -19,14 +19,21 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    user= User.new(:name=> params[:name], :username=> params[:username], :password=> params[:password])
-    if !params[:name].empty?  && !params[:username].empty? && !params[:password].empty?
+    user= User.new(:name=> params[:name], :username=> params[:username], :password=> params[:password], :email=> params[:email])
+    
+    if !params[:name].empty?  && !params[:username].empty? && !params[:password].empty? && !params[:email].empty? && !User.find_by(:username=>params[:username]) && !User.find_by(:email=>params[:email])
       user.save
       redirect '/login' 
-  else 
+    elsif 
+    User.find_by(:username=>params[:username])
+      erb :username_error
+    elsif  User.find_by(:email=>params[:email])
+        erb :email_error
+      else
     redirect '/failure'
-  end
-end
+    end
+   end
+ 
   
   get '/failure' do
     erb :failure
@@ -43,7 +50,10 @@ end
   end
   
   get '/account' do
+    if logged_in?
     erb :account
+    else redirect to '/'
+    end
   end
   
   get "/logout" do

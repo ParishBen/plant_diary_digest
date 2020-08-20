@@ -8,7 +8,7 @@
 <%if plant.logs%>
 <%plant.logs.each do |log|%>
 <ul>
- <h4><li><%=plant.nickname%> ~ Watered On ~ <%=log.watered_date%>--Updated Condition: <%=log.condition_update%> --Noteworthy Care Changes:<%=log.content%>
+ <h4><li><%=plant.nickname%> -a <%=plant.plant_type%> ~ Last Watered ~ <%=log.watered_date%>--Updated Condition: <%=log.condition_update%> --Noteworthy Care Changes:<%=log.content%>
 ~~By: <a href="/user/<%=user.id%>"><%=user.username%></a></li></h4></ul>
    <%end%>
   <%end%>
@@ -32,4 +32,5 @@
 <%end%>
 <%end%>
 <%end%>
-<h4><a href="/account">Your Profile Home</a></h4>
+<%if logged_in?%><h4><a href="/account">Your Profile Home</a></h4><%else%>
+<h4><a href="/">Login or Signup</a></h4><%end%>

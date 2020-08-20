@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_031432) do
+ActiveRecord::Schema.define(version: 2020_08_20_034943) do
 
   create_table "logs", force: :cascade do |t|
     t.text "content"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_031432) do
     t.string "username"
     t.string "name"
     t.string "password_digest"
+    t.string "email"
   end
 
 end

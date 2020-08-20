@@ -1,4 +1,4 @@
-<h1>Welcome, <%=current_user.name%></h1>
+<%if logged_in?%><h1>Welcome, <%=current_user.name.capitalize%></h1><%else%><h1><%=@user.username.capitalize%> Profile Page</h1><%end%>
 <br>
 
 <h2><%=@user.username%> Plants:</h2>
@@ -16,4 +16,5 @@
 <br>
 
 <h3><a href='/home'>Home Feed</a></h3>
-<h3><a href='/account'>Back to Your Account</a></h3>
+<%if logged_in?%><h3><a href='/account'>Back to Your Account</a></h3><%end%>
+<%if !logged_in?%><h3><a href='/'>Sign Up or Login</a></h3><%end%>

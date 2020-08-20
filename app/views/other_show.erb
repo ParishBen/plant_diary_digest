@@ -14,4 +14,5 @@
 <br>
 <h4><a href="/home"> Home Feed</a></h4>
 
-<h4><a href="/account">Your Profile Home</a></h4>
+<%if logged_in?%><h4><a href="/account">Your Profile Home</a></h4><%end%>
+<%if !logged_in?%><h4><a href="/">Sign up or Login</a></h4><%end%>
