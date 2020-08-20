@@ -1,6 +1,29 @@
+<!DOCTYPE html>
+<head>
+ <meta charset="UTF-8">
+    <title>Account Home</title>
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+    <style> #link { color: brown;}
+            #tip { color: brown;}
+            #bottomlinks {color:brown;}
+            h1 {color: Brown;
+                text-decoration: underline; 
+            }
+            h3 {text-align : center;
+                text-decoration: underline}
+            h4 {text-align: left;}
+            body {
+    
+    background-color: #97c04f;
+    color: #423136;
+     
+    }
+    </style>
+</head>
+<body>
 <h1>HOME FEED</h1>
 
-<h3>Here's how everyone's plants are doing...</h3><br><br>
+<h3>Here's how everyone's plants are doing...</h3><br>
 <%if @users%>
 <%@users.each do |user|%>
 <%if user.plants%>
@@ -16,7 +39,7 @@
   <%end%>
   <%end%>
   <%end%>
-<h4>Here's Tips From the Community</h4>
+<h3>Here's Tips From the Community</h3><br>
 
 
 
@@ -32,5 +55,7 @@
 <%end%>
 <%end%>
 <%end%>
-<%if logged_in?%><h4><a href="/account">Your Profile Home</a></h4><%else%>
-<h4><a href="/">Login or Signup</a></h4><%end%>
+<br>
+<footer><%if logged_in?%><h4><a href="/account">Your Profile Home</a></h4><%else%>
+<h4><a href="/">Login or Signup</a></h4><%end%></footer>
+</body></html>

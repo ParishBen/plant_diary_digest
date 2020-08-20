@@ -1,3 +1,26 @@
+<!DOCTYPE html>
+<head>
+
+<title>Plant Diary Digest</title>
+
+ <meta charset="UTF-8">
+   
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+    <style> #link { color: brown;}
+            #tip { color: brown;}
+            #bottomlinks {color:brown;}
+            h1 {color: brown;
+                text-decoration: underline;} 
+                     body {
+    text-align: center;
+    background-color: #97c04f;
+    color: #423136;
+     
+    }
+    </style>
+</head>
+<body>
+<h1>Let's edit <%=@plant.nickname.capitalize%> shall we</h1><br><br>
 <form action="/plant/<%=@plant.id%>"  method="post">
 <input type="hidden" name="_method" value="patch">
 
@@ -5,4 +28,4 @@
 <input type = "text" placeholder= "Nickname" name="plant[nickname]" value = "<%=@plant.nickname%>"/>
 <input type = "text" placeholder= "Plant Type" name="plant[plant_type]" value = "<%=@plant.plant_type%>"/>
 <input type= "submit" value="update"/>
-</form>
+</form></body></html>

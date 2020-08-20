@@ -1,3 +1,23 @@
+<!DOCTYPE html>
+<head>
+ <meta charset="UTF-8">
+    <title>Account Home</title>
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+    <style> #link { color: brown;}
+            #tip { color: brown;}
+            #bottomlinks {color:brown;}
+            h1 {color: Brown;
+                text-decoration: underline; 
+            }
+                 body {
+    text-align: center;
+    background-color: #97c04f;
+    color: #423136;
+     
+    }
+    </style>
+</head>
+<body>
 <h1>Let's edit that tip</h1>
 
 <form method="POST" action='/tip/<%=@tip.id%>'>
@@ -5,4 +25,4 @@
 <input type="text" name="tip[plant_type]" placeholder="Type of Plant" value="<%=@tip.plant_type%>"/><br>
 <textarea type="text" name="tip[content]" placeholder="Write Your Tip" value="<%=@tip.content%>" ></textarea><br>
 <input type="submit" value="Edit Tip">
-</form>
+</form></body></html>

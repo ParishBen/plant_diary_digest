@@ -1,9 +1,23 @@
+<!DOCTYPE html>
+<head>
+ <meta charset="UTF-8">
+    <title>Account Home</title>
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+    <style> #link { color: brown;}
+            #tip { color: brown;}
+            #bottomlinks {color:brown;}
+            h1 {color: Brown;
+                text-decoration: underline; 
+            }
+    </style>
+</head>
+<body>
 <h1>Welcome, <%=current_user.name%></h1>
 <br>
 
 <h2>Your Plants:</h2>
 <ul><%current_user.plants.each do |plant|%>
-<li><a href="/plant/<%=plant.id%>"><%=plant.nickname.capitalize%></a> The <%=plant.common_name%> || <a href="/plant/<%=plant.id%>/edit">Edit Plant</a> || <a href= "/plant/<%=plant.id%>/delete">Delete Plant</a></li>
+<li><a id="link" href="/plant/<%=plant.id%>"><%=plant.nickname.capitalize%></a> The <%=plant.common_name%> || <a href="/plant/<%=plant.id%>/edit">Edit Plant</a> || <a href= "/plant/<%=plant.id%>/delete">Delete Plant</a></li>
 
     <%end%></ul>
 <br>
@@ -12,13 +26,15 @@
 <%if current_user.tips%>
 <%current_user.tips.each do |tip|%>
 <ul>
-<li>For a <%=tip.plant_type%>:  <%=tip.content%> ||<a href="/tip/<%=tip.id%>/edit">Edit</a> || <a href="/tip/<%=tip.id%>/delete">Delete Tip</a></li></ul>
+<li>For a <%=tip.plant_type%>:  <%=tip.content%> ||<a id="tip" href="/tip/<%=tip.id%>/edit">Edit</a> || <a href="/tip/<%=tip.id%>/delete">Delete Tip</a></li></ul>
 <%end%>
 <%end%>
 <br>
 <br>
 
-<h3><a href='/home'>Home Feed</a></h3>
-<h3><a href='/plant/new'>New Plant</a></h3>
-<h3><a href="/plant/log/new">Add a Log</a></h3>
-<h3><a href='/tip/new'>New Tip</a></h3>
+<h3><a id="bottomlinks" href='/home'>Home Feed</a></h3>
+<h3><a id="bottomlinks" href='/plant/new'>New Plant</a></h3>
+<h3><a id="bottomlinks" href="/plant/log/new">Add a Log</a></h3>
+<h3><a id="bottomlinks" href='/tip/new'>New Tip</a></h3>
+</body>
+</html>

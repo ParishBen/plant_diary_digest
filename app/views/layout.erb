@@ -2,7 +2,20 @@
 <head>
 
 <title>Plant Diary Digest</title>
+
+ <meta charset="UTF-8">
+   
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+    <style> #link { color: brown;}
+            #tip { color: brown;}
+            #bottomlinks {color:brown;}
+            h1 {color: lightgrey;
+                text-decoration: underline; 
+            }
+            footer {text-align: left}
+    </style>
 </head>
+
 <body>
 <%=yield%>
 <footer><%if logged_in?%>

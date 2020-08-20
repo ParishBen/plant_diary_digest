@@ -1,3 +1,23 @@
+<!DOCTYPE html>
+<head>
+ <meta charset="UTF-8">
+    <title>Account Home</title>
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+    <style> #link { color: brown;}
+            #tip { color: brown;}
+            #bottomlinks {color:brown;}
+            h1 {color: Brown;
+                text-decoration: underline; 
+            }
+                 body {
+    text-align: center;
+    background-color: #97c04f;
+    color: #423136;
+     
+    }
+    </style>
+</head>
+<body>
 <h1><%if @plant.nickname.ends_with?("s")%> <%=@plant.nickname.to_s.capitalize%>' Diary <%else%> <%=@plant.nickname.to_s.capitalize%>'s Diary</h1><%end%>
 <br>
 <br>
@@ -16,3 +36,4 @@
 
 <%if logged_in?%><h4><a href="/account">Your Profile Home</a></h4><%end%>
 <%if !logged_in?%><h4><a href="/">Sign up or Login</a></h4><%end%>
+</body></html>
