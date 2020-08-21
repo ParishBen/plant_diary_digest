@@ -28,4 +28,7 @@
 <input type = "text" placeholder= "Nickname" name="plant[nickname]" value = "<%=@plant.nickname%>"/>
 <input type = "text" placeholder= "Plant Type" name="plant[plant_type]" value = "<%=@plant.plant_type%>"/>
 <input type= "submit" value="update"/>
+<br><br>
+<%if logged_in?%><h4><a href= "/account">Back to Account</a></h4><%end%>
+
 </form></body></html>

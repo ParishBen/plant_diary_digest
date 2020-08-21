@@ -23,4 +23,8 @@
 <form method="post" action="/tip/<%= @tip.id %>">
   <input type="hidden" name="_method" value="delete" />
   <input type="submit" value="Delete" />
+
+  <br>
+  <%if logged_in?%><h4><a href= "/account">Back to Account</a></h4><%end%>
+
 </form></body></html>

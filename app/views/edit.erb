@@ -33,4 +33,8 @@
 <textarea type="text" name="log[content]" placeholder="Document any care changes & result(s)" value="<%=@log.content%>" ></textarea>
 <input type="text" name="log[watered_date]" placeholder="Last Watering Date" value= "<%= @log.watered_date %>">
 <input type="submit" value="Update Log">
+
+<br><br>
+<%if logged_in?%><h4><a href= "/account">Back to Account</a></h4><%end%>
+
 </form></body></html>

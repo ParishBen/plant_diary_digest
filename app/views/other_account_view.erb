@@ -17,15 +17,15 @@
     </style>
 </head>
 <body></body>
-<%if logged_in?%><h1>Welcome, <%=current_user.name.capitalize%></h1><%else%><h1><%=@user.username.capitalize%> Profile Page</h1><%end%>
+<%if logged_in?%><h1>Welcome, <%=current_user.name.capitalize%></h1><%else%><h2><%=@user.username.capitalize%> Profile Page</h1><%end%>
 <br>
+<h2><%if @user.username.ends_with?("s")%> <%=@user.username.to_s.capitalize%>' Plants: <%else%> <%=@user.username.to_s.capitalize%>'s Plants:</h2><%end%>
 
-<h2><%=@user.username%> Plants:</h2>
 <ul><%@user.plants.each do |plant|%>
 <li><a href="/plant/<%=plant.id%>"><%=plant.nickname.capitalize%></a> The <%=plant.common_name%>
 
     <%end%></ul>
-<h3><%=@user.username%> Tips:</h3>
+<h2><%if @user.username.ends_with?("s")%> <%=@user.username.to_s.capitalize%>' Tips: <%else%> <%=@user.username.to_s.capitalize%>'s Tips:</h2><%end%>
 <ul><%@user.tips.each do |tip|%>
 <li>For a <%=tip.plant_type%>:  <%=tip.content%></li>
 <%end%></ul>
