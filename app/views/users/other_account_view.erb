@@ -4,7 +4,8 @@
     <title>PlantDiary-Viewing Account</title>
     <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
     <style> 
-            #bottomlinks {color:brown;}
+            #otherviewplant {color:brown;
+            font-weight: bolder;}
             h1 {color: lightgrey;
                 text-decoration: underline; 
             }
@@ -22,7 +23,7 @@
 <h2><%if @user.username.ends_with?("s")%> <%=@user.username.to_s.capitalize%>' Plants: <%else%> <%=@user.username.to_s.capitalize%>'s Plants:</h2><%end%>
 
 <ul><%@user.plants.each do |plant|%>
-<li><a href="/plant/<%=plant.id%>"><%=plant.nickname.capitalize%></a> The <%=plant.common_name%>
+<li><a id="otherviewplant" href="/plants/<%=plant.id%>"><%=plant.nickname.capitalize%></a> The <%=plant.common_name%>
 
     <%end%></ul>
 <h2><%if @user.username.ends_with?("s")%> <%=@user.username.to_s.capitalize%>' Tips: <%else%> <%=@user.username.to_s.capitalize%>'s Tips:</h2><%end%>

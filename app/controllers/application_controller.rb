@@ -2,7 +2,7 @@ require_relative '../../config/environment'
 class ApplicationController < Sinatra::Base
   configure do
     set :views, "app/views"
-    set :public, "public/sytlesheets/"
+    set :public_folder, "public/stylesheets"
     enable :sessions 
     set :session_secret, ENV['SESSION_SECRET']
   end
