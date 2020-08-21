@@ -28,13 +28,13 @@
 <%@plant.logs.each do |log|%>
 
  <h4><li> Watered On~ <%=log.watered_date%>--Updated Condition: <%=log.condition_update%> --Noteworthy Care Changes:<%=log.content%>--
-<a href="/log/<%=log.id%>/edit">Edit Log</%a>--<a href="/log/<%=log.id%>">Delete Log</a></li></h4></ul>
+<a href="/logs/<%=log.id%>/edit">Edit Log</%a>--<a href="/logs/<%=log.id%>">Delete Log</a></li></h4></ul>
    <%end%>
   <%end%>
 
 <br>
 <h4><a href = "/home">Home Feed</a></h4>
-<h4><a href="/plant/log/new">Add a Log</a></h4>
+<h4><a href="/plants/log/new">Add a Log</a></h4>
 <h4><a href="/account">Your Profile Home</a></h4>
 
 </body></html>

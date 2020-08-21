@@ -18,7 +18,12 @@
     </style>
 </head>
 <body>
-<h1>Sorry, <%=current_user.name%> let's try that again</h1>
-<h2><a href="/plant/new">New Plant</a></h2>
-<%if logged_in?%><h3><a href="/account">Your Account Home</a></h3><%end%>
-</body></html>
+<h1>Delete <%=@plant.nickname%>'s Log</h1>
+
+<form method="post" action="/logs/<%= @log.id %>">
+  <input type="hidden" name="_method" value="delete" />
+  <input type="submit" value="Delete" />
+  <br><br>
+  <%if logged_in?%><h4><a href= "/account">Back to Account</a></h4><%end%>
+
+</form></body></html>

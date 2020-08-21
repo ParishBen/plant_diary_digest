@@ -32,7 +32,7 @@
 <%plant.logs.each do |log|%>
 <ul>
  <h4><li><%=plant.nickname%> -a <%=plant.plant_type%> ~ Last Watered ~ <%=log.watered_date%>--Updated Condition: <%=log.condition_update%> --Noteworthy Care Changes:<%=log.content%>
-~~By: <a href="/user/<%=user.id%>"><%=user.username%></a></li></h4></ul>
+~~By: <a href="/users/<%=user.id%>"><%=user.username%></a></li></h4></ul>
    <%end%>
   <%end%>
   <%end%>
@@ -50,7 +50,7 @@
 
 
 <ul>
-<h4><li>Plant Type: <%=tip.plant_type%> ~~ Tip: <%=tip.content%>~~ <a href="/user/<%=user.id%>"> <%=user.username%></a></li></h4></ul> 
+<h4><li>Plant Type: <%=tip.plant_type%> ~~ Tip: <%=tip.content%>~~ <a href="/users/<%=user.id%>"> <%=user.username%></a></li></h4></ul> 
 <%end%>
 <%end%>
 <%end%>

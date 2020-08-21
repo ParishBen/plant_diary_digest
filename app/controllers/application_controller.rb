@@ -1,22 +1,22 @@
 require_relative '../../config/environment'
 class ApplicationController < Sinatra::Base
   configure do
-    set :views, "app/views/"
+    set :views, "app/views"
     set :public, "public/sytlesheets/"
     enable :sessions 
     set :session_secret, ENV['SESSION_SECRET']
   end
  
   get '/' do
-    erb :welcome
+    erb :'users/welcome'
   end
   
   get '/login' do
-    erb :login
+    erb :'users/login'
   end
   
   get '/signup' do
-    erb :signup
+    erb :'users/signup'
   end
 
   post '/signup' do
@@ -27,9 +27,9 @@ class ApplicationController < Sinatra::Base
       redirect '/login' 
     elsif 
     User.find_by(:username=>params[:username])
-      erb :username_error
+      erb :'users/username_error'
     elsif  User.find_by(:email=>params[:email])
-        erb :email_error
+        erb :'users/email_error'
       else
     redirect '/failure'
     end
@@ -37,7 +37,7 @@ class ApplicationController < Sinatra::Base
  
   
   get '/failure' do
-    erb :failure
+    erb :'users/failure'
   end
 
   post '/login' do
@@ -52,7 +52,7 @@ class ApplicationController < Sinatra::Base
   
   get '/account' do
     if logged_in?
-    erb :account
+    erb :'users/account'
     else redirect to '/'
     end
   end
@@ -66,7 +66,7 @@ class ApplicationController < Sinatra::Base
     @users = User.all
     @tips = Tip.all
     
-    erb :home
+    erb :'users/home'
     
   end
 

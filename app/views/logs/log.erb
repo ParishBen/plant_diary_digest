@@ -29,12 +29,12 @@
 <h1>Let's Log That</h1>
 
 <%if @user.plants==[]%>
-<h2>Looks like you need to <a href="/plant/new">create a plant</a> first</h2>
+<h2>Looks like you need to <a href="/plants/new">create a plant</a> first</h2>
 <%else%>
 
 
 
-<form action="/plant/logs" method="POST">
+<form action="/plants/logs" method="POST">
 
 <select name= "user_plant" id="user_plant">
 

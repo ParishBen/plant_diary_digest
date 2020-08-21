@@ -1,10 +1,10 @@
 class PlantController < ApplicationController
 
-    get '/plant/new' do
+    get '/plants/new' do
         if !logged_in?
             redirect '/'
         else
-        erb :plant
+        erb :'plants/plant'
     end
 end
 
@@ -20,31 +20,31 @@ end
         end
 
     get '/plant_failure' do
-    erb :plant_failure
+    erb :'plants/plant_failure'
     end
     
     get '/plants' do
         if logged_in?
-        erb :account
+        erb :'users/account'
         else redirect '/'
     end
 end
 
-    get '/plant/:id' do 
+    get '/plants/:id' do 
         if !logged_in?
             @plant = Plant.find(params[:id])
-            erb :other_show
+            erb :'plants/other_show'
         elsif
         @plant = Plant.find(params[:id])
         @plants= current_user.plants
         if @plants.find_by(:id=>@plant.id)
-        erb :plant_show
+        erb :'plants/plant_show'
         else
-            erb :other_show
+            erb :'plants/other_show'
         end
     end
 end
-    get '/plant/:id/edit' do
+    get '/plants/:id/edit' do
     if
         !logged_in?
             redirect to '/'
@@ -52,31 +52,31 @@ end
         @plant = Plant.find(params[:id])
         @plants = current_user.plants
         if @plants.find_by(:id=>@plant.id)
-            erb :plant_edit
+            erb :'plants/plant_edit'
             else
                 redirect to '/account'
             end
         end
     end
 
-    patch '/plant/:id' do
+    patch '/plants/:id' do
         @plant = Plant.find(params[:id])
         if !params[:plant].values.any?{|v| v.empty?}
         @plant.update(params[:plant])
         redirect to "/plants"
     else
-        erb :plant_failure
+        erb :'plants/plant_failure'
     end
 end
     
-    get '/plant/:id/delete' do
+    get '/plants/:id/delete' do
         if !logged_in?
             redirect to '/'
         elsif
         @plant = Plant.find(params[:id])
         @plants = current_user.plants
         if @plants.find_by(:id=>@plant.id)
-        erb :delete_plant 
+        erb :'plants/delete_plant'
         else redirect '/account'
      end
     end
@@ -85,7 +85,7 @@ end
 
 
 
-    delete "/plant/:id" do
+    delete "/plants/:id" do
         Plant.destroy(params[:id])
         redirect to "/plants"
       end

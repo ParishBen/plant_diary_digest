@@ -18,7 +18,7 @@
 <body>
 <h1>Delete <%=@plant.nickname%></h1>
 
-<form method="post" action="/plant/<%= @plant.id %>">
+<form method="post" action="/plants/<%= @plant.id %>">
   <input type="hidden" name="_method" value="delete" />
   <input type="submit" value="Delete" />
 

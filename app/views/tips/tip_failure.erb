@@ -18,13 +18,7 @@
     </style>
 </head>
 <body>
-<h1>Delete that Tip</h1>
-
-<form method="post" action="/tip/<%= @tip.id %>">
-  <input type="hidden" name="_method" value="delete" />
-  <input type="submit" value="Delete" />
-
-  <br>
-  <%if logged_in?%><h4><a href= "/account">Back to Account</a></h4><%end%>
-
-</form></body></html>
+<h1>Sorry, <%=current_user.name%> let's try that again</h1>
+<h2><a href="/tips/new">New Tip</a></h2>
+<h4><a href="/account">Return to Your Account</a></h4>
+</body></html>

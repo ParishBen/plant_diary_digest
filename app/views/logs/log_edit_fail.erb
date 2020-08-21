@@ -18,6 +18,8 @@
     </style>
 </head>
 <body>
-<h2>Sorry, that username is already in the system</h2>
-<h3><a href='/'>Sign Up Or Login</a></h3>
+<h1>All fields must be filled out to Edit Log</h1>
+
+<%if logged_in?%><h4><a href= "/logs/<%=@log.id%>/edit">Try Again</a></h4><%end%>
+<h5><a href='/account'>Your Profile Home</a></h5>
 </body></html>

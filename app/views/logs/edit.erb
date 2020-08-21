@@ -20,7 +20,7 @@
 <body>
 <h1>Edit <%if @plant.nickname.ends_with?("s")%> <%=@plant.nickname.to_s.capitalize%>' Log <%else%> <%=@plant.nickname.to_s.capitalize%>'s Log</h1><%end%>
 
-<form action="/log/<%=@log.id%>" method="post">
+<form action="/logs/<%=@log.id%>" method="post">
  <input type="hidden" name="_method" value="patch">
 
 

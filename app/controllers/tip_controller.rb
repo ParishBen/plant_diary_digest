@@ -1,10 +1,10 @@
 class TipController < ApplicationController
-get '/tip/new' do
+get '/tips/new' do
     @user = current_user
     if @user
-        erb :tip
+        erb :'tips/tip'
     else
-       erb :failure
+       erb :'users/failure'
     end
   end
   post '/tips' do
@@ -14,17 +14,17 @@ get '/tip/new' do
         @tip.save
         redirect to '/account'
     else 
-        redirect to '/tip/failure'
+        redirect to '/tips/failure'
     end
   end
 
-  get '/tip/failure' do
-    erb :tip_failure
+  get '/tips/failure' do
+    erb :'tips/tip_failure'
   end
 
-  get '/tip/:id/edit' do
+  get '/tips/:id/edit' do
     if !logged_in?
-      erb :failure
+      erb :'users/failure'
     elsif
     @tip = Tip.find(params[:id])
     @tips = current_user.tips
@@ -32,37 +32,37 @@ get '/tip/new' do
       redirect '/account'
     else
      
-      erb :tip_edit
+      erb :'tips/tip_edit'
     end
    end
   end
 
-  patch '/tip/:id' do
+  patch '/tips/:id' do
     @tip = Tip.find(params[:id])
     if !params[:tip].values.any?{|v| v.empty?} 
     @tip.update(params[:tip])
     redirect to '/account'
   
-    else erb :tip_failure
+    else erb :'tips/tip_failure'
   end
 end
 
 
 
-  get '/tip/:id/delete' do
+  get '/tips/:id/delete' do
     @tip = Tip.find(params[:id])
     @tips = current_user.tips
     if  @tips.find_by(:id=>@tip.id)
-        erb :tip_delete
+        erb :'tips/tip_delete'
          
     elsif logged_in? 
             redirect to '/account'
     else
-        erb :failure
+        erb :'users/failure'
      end
     end
 
-    delete '/tip/:id' do
+    delete '/tips/:id' do
         Tip.destroy(params[:id])
         redirect to '/account'
     end

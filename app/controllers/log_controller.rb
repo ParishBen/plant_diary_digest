@@ -1,6 +1,6 @@
 class LogController < ApplicationController
    
-    get '/plant/log/new' do
+    get '/plants/logs/new' do
         if !logged_in?
             redirect to '/'
         elsif
@@ -8,29 +8,29 @@ class LogController < ApplicationController
         
         @conditions = ["Dead", "Far Worse", "Slightly Worse", "About the Same", "Slightly Livelier", "Much Healthier", "Healthiest Yet!"]
         if @user
-        erb :log
+        erb :'logs/log'
     
         end
     end
 end
-        post '/plant/logs' do 
+        post '/plants/logs' do 
             @plant = Plant.find_by(:id=>params["user_plant"])
             
             @log= Log.new(:watered_date => params[:watered_date], :condition_update=> params[:condition_update], :content=> params[:content]) 
             if !params[:condition_update].empty? && !params[:content].empty? && !params[:watered_date].empty?
                 @log.plant_id= @plant.id
              @log.save
-             erb :plant_show
+             redirect to "/plants/#{@plant.id}"
                else 
                 redirect '/log_failure'
                  end 
                 end
         
            get '/log_failure' do
-            erb :log_failure
+            erb :'logs/log_failure'
             end
 
-           get '/log/:id/edit' do
+           get '/logs/:id/edit' do
             if !logged_in?
                 redirect to '/'
             elsif
@@ -40,13 +40,13 @@ end
             @logs = current_user.logs
             if @logs.find_by(:id=>@log.id)
             @conditions = ["Dead", "Far Worse", "Slightly Worse", "About the Same", "Slightly Livelier", "Much Healthier", "Healthiest Yet!"]
-            erb :edit
+            erb :'logs/edit'
             else
-                erb :log_failure
+                erb :'logs/log_failure'
            end
         end
     end
-           patch "/log/:id" do
+           patch "/logs/:id" do
 
            @log = Log.find(params[:id])
            @plant = Plant.find(@log[:plant_id])
@@ -55,15 +55,15 @@ end
            
             @log.update(params[:log])  
            
-           redirect to "/plant/log/#{ @plant.id}"
+           redirect to "/plants/#{ @plant.id}"
            
         else
-             erb :log_edit_fail
+             erb :'logs/log_edit_fail'
              
            end
         end
     
-           get '/log/:id' do
+           get '/logs/:id' do
             if !logged_in?
                 redirect to '/'
             elsif
@@ -71,33 +71,33 @@ end
            @plant = Plant.find(@log[:plant_id])
            @logs = current.user.logs
            if @logs.find_by(:id=>@log.id)
-           erb :delete
+           erb :'logs/log_delete'
            else redirect '/account'
            end
           end
         end
            
-           get '/plant/log/:id' do 
+           get '/plants/logs/:id' do 
             @plant = Plant.find(params[:id])
             if !logged_in?
-               erb :other_show
+               erb :'plants/other_show'
             elsif 
                 @plants= current_user.plants
                 if @plants.find_by(:id=>@plant.id)
-               erb :plant_show
+               erb :'plants/plant_show'
                 else
-                    erb :other_show
+                    erb :'plants/other_show'
                 end
                    
            end
         end
 
-           delete "/log/:id" do
+           delete "/logs/:id" do
             @log = Log.find(params[:id])
             @plant = Plant.find(@log[:plant_id])
             Log.destroy(params[:id])
             
-            redirect to "/plant/#{@plant.id}"
+            redirect to "/plants/#{@plant.id}"
            end
 
         
