@@ -6,25 +6,25 @@ Plant Diary Digest is a Sinatra Web Application that allows the user to not only
 # Prerequisites
 Bundle init to Bundle the following Ruby Gems:
 <li>
-gem "rake", "~> 13.0"
-gem "shotgun", "~> 0.9.2"
-gem "pry", "~> 0.13.1"
-gem "activerecord", "~> 5.2", :require => 'active_record'
-gem "sinatra", "~> 2.0"
-gem "tux", "~> 0.3.0"
-gem "sqlite3", "~> 1.4"
-gem "sinatra-activerecord", "~> 2.0", :require => 'sinatra/activerecord'
-gem "require_all", "~> 3.0"
-gem "bcrypt", "~> 3.1"
+gem "rake", "~> 13.0"</li>
+<li>gem "shotgun", "~> 0.9.2"</li>
+<li>gem "pry", "~> 0.13.1"</li>
+<li>gem "activerecord", "~> 5.2", :require => <li>'active_record'</li>
+<li>gem "sinatra", "~> 2.0"</li>
+<li>gem "tux", "~> 0.3.0"</li>
+<li>gem "sqlite3", "~> 1.4"</li>
+<li>gem "sinatra-activerecord", "~> 2.0", :require => 'sinatra/activerecord'</li>
+<li>gem "require_all", "~> 3.0"</li>
+<li>gem "bcrypt", "~> 3.1"
 </li>
 
 
 ## Installation
 <li>
 Travel to https://github.com/ParishBen/plant_diary_digest to clone the repo. 
-Reach out to ParishBen13@gmail.com for Session Secrete variable
-Bundle Install the above gem list
-Execute shotgun to rackup project to your browser on your localhost
+Reach out to ParishBen13@gmail.com for Session Secrete variable.
+Bundle Install the above gem list.
+Execute shotgun to rackup project to your browser on your localhost.
 Signup & go!
 </li>
 
