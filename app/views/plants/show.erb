@@ -19,13 +19,13 @@
     </style>
 </head>
 <body>
-<h1><%if @plant.nickname.ends_with?("s")%> <%=@plant.nickname.to_s.capitalize%>' Diary <%else%> <%=@plant.nickname.to_s.capitalize%>'s Diary</h1><%end%>
+<h1><%if @plants.nickname.ends_with?("s")%> <%=@plants.nickname.to_s.capitalize%>' Diary <%else%> <%=@plants.nickname.to_s.capitalize%>'s Diary</h1><%end%>
 <br>
 <br>
 
 <h2>Care Chronicles:</h2>
-<ul><%if @plant.logs%>
-<%@plant.logs.each do |log|%>
+<ul><%if @plants.logs%>
+<%@plants.logs.each do |log|%>
 
  <h4><li> Watered On~ <%=log.watered_date%>--Updated Condition: <%=log.condition_update%> --Noteworthy Care Changes:<%=log.content%>--
 <a href="/logs/<%=log.id%>/edit">Edit Log</%a>--<a href="/logs/<%=log.id%>">Delete Log</a></li></h4></ul>

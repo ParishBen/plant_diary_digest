@@ -1,69 +1,72 @@
 class TipController < ApplicationController
-get '/tips/new' do
+  get '/tips/new' do
     @user = current_user
-    if @user
-        erb :'tips/tip'
-    else
-       erb :'users/failure'
-    end
+      if @user
+        erb :'tips/new'
+      else
+        erb :'users/failure'
+     end
   end
+  
   post '/tips' do
-    @tip = Tip.new(:plant_type=> params["plant_type"], :content=> params["content"])
-    if !@tip.content.empty? && !@tip.plant_type.empty?
-        @tip.user_id = current_user.id
-        @tip.save
-        redirect to '/account'
-    else 
-        redirect to '/tips/failure'
-    end
-  end
+    @tip = Tip.new(:plant_type=> params["plant_type"], :content=> params["content"])    
+      redirect_if_not_logged_in
+        if !@tip.content.empty? && !@tip.plant_type.empty?
+          @tip.user_id = current_user.id
+          @tip.save
+          redirect to '/account'
+        else 
+          redirect to '/tips/failure'
+       end
+   end
 
   get '/tips/failure' do
     erb :'tips/tip_failure'
   end
 
   get '/tips/:id/edit' do
-    if !logged_in?
-      erb :'users/failure'
-    elsif
-    @tip = Tip.find(params[:id])
-    @tips = current_user.tips
-    if  !@tips.find_by(:id=>@tip.id)
-      redirect '/account'
-    else
-     
-      erb :'tips/tip_edit'
+    @tip= current_user.tips.find_by(:id=> params[:id])
+       redirect_if_not_logged_in
+         if @tip
+            erb :'tips/edit'
+         else 
+            redirect '/account'
+        end
     end
-   end
-  end
+     
+     
+  
 
   patch '/tips/:id' do
-    @tip = Tip.find(params[:id])
-    if !params[:tip].values.any?{|v| v.empty?} 
-    @tip.update(params[:tip])
-    redirect to '/account'
-  
-    else erb :'tips/tip_failure'
+    @tip= current_user.tips.find_by(:id=> params[:id])
+      if @tip && !params[:tip].values.any?{|v| v.empty?} 
+         @tip.update(params[:tip])
+         redirect to '/account'
+      else 
+        erb :'tips/tip_failure'
+     end
   end
-end
 
 
 
   get '/tips/:id/delete' do
-    @tip = Tip.find(params[:id])
-    @tips = current_user.tips
-    if  @tips.find_by(:id=>@tip.id)
-        erb :'tips/tip_delete'
-         
-    elsif logged_in? 
-            redirect to '/account'
-    else
-        erb :'users/failure'
-     end
-    end
+    @tip= current_user.tips.find_by(:id=> params[:id])     
+      redirect_if_not_logged_in
+        if @tip
+          erb :'tips/delete'
+        else
+          redirect to '/account'
+       end
+   end
 
-    delete '/tips/:id' do
-        Tip.destroy(params[:id])
-        redirect to '/account'
+  delete '/tips/:id' do
+    @tip= current_user.tips.find_by(:id=> params[:id])
+      redirect_if_not_logged_in
+       if @tip
+         Tip.destroy(params[:id])
+         redirect to '/account'
+       elsif !@tip
+        erb :'tips/tip_failure'
+      end
     end
 end
