@@ -18,6 +18,7 @@
     </style>
 </head>
 <body>
+<%if flash[:new_tip_error]%><h1><%=flash[:new_tip_error]%></h1><%end%><br>
 <h1>Share Some Green Thumb Pointers!</h1>
 
 <form method="POST" action='/tips'>

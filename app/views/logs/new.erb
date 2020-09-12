@@ -26,6 +26,7 @@
 
 </head>
 <body>
+<%if flash[:log_new_fail]%><h1><%=flash[:log_new_fail]%></h1><%end%><br>
 <h1>Let's Log That</h1>
 
 <%if @user.plants==[]%>

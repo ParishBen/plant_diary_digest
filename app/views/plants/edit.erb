@@ -20,6 +20,8 @@
     </style>
 </head>
 <body>
+<%if flash[:plant_edit_fail]%><h1><%=flash[:plant_edit_fail]%></h1><%end%>
+<%if flash[:plant_edit_attempt]%><h1><%= flash[:plant_edit_attempt]%></h1><%end%>
 <h1>Let's edit <%=@plant.nickname.capitalize%> shall we</h1><br><br>
 <form action="/plants/<%=@plant.id%>"  method="post">
 <input type="hidden" name="_method" value="patch">

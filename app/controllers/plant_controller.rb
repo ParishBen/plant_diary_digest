@@ -14,7 +14,9 @@ class PlantController < ApplicationController
              @plant.save
               redirect to '/account'
         else 
-            redirect '/plant_failure'
+          flash[:plant_new_fail] = "Sorry we couldn't create that plant. Please try again."
+            redirect to '/plants/new'
+            
         end 
     end
 
@@ -45,6 +47,7 @@ class PlantController < ApplicationController
         if @plant 
           erb :'plants/edit'
            else
+            flash[:plant_edit_fail] = "Sorry you can't edit that Plant."
             redirect to '/account'
         end
      end
@@ -56,7 +59,8 @@ class PlantController < ApplicationController
             @plant.update(params[:plant])
             redirect to "/plants"
           else
-            erb :'plants/plant_failure'
+            flash[:plant_edit_attempt] = "Sorry, please ensure all fields are filled out."
+            redirect to "/plants/#{@plant.id}/edit"
           end
     end
     
@@ -65,7 +69,9 @@ class PlantController < ApplicationController
         @plant= current_user.plants.find_by(:id => params[:id]) 
             if @plant
               erb :'plants/delete'
-            else redirect '/account'
+            else 
+              flash[:wrongful_plant_delete]= "Sorry You Can't Delete That Plant."
+              redirect '/account'
             end
     end
     
@@ -79,7 +85,8 @@ class PlantController < ApplicationController
            if @plant
              Plant.destroy(params[:id])
              redirect to "/plants"
-           else 
+           else
+             flash[:delete_attempt] = "You're not permitted to delete that Plant"
              redirect '/account' 
           end
      end

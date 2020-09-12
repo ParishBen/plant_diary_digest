@@ -17,9 +17,16 @@
     </style>
 </head>
 <body>
+<%if flash[:wrongful_delete_attempt]%><h1><%=flash[:wrongful_delete_attempt]%></h1><br><%end%>
+<%if flash[:wrong_delete_path] %><h1><%=flash[:wrong_delete_path] %></h1><br><%end%>
+<%if flash[:wrongful_log_edit]%><h1><%=flash[:wrongful_log_edit]%></h1><br><%end%>
+<%if flash[:delete_attempt]%><h1><%=flash[:delete_attempt]%></h1><%end%><br>
+<%if flash[:wrongful_plant_delete]%><h1><%=flash[:wrongful_plant_delete]%></h1><%end%><br>
+<%if flash[:plant_edit_fail]%><h1><%=flash[:plant_edit_fail]%></h1><%end%><br>
+<%if flash[:wrongful_tip_edit]%><h1><%=flash[:wrongful_tip_edit]%></h1><%end%><br>
+<%if flash[:wrongful_tip_delete]%><h1><%=flash[:wrongful_tip_delete]%></h1><br><%end%>
 <h1>Welcome, <%=current_user.name%></h1>
 <br>
-
 <h2>Your Plants:</h2>
 <ul><%current_user.plants.each do |plant|%>
 <li><a id="link" href="/plants/<%=plant.id%>"><%=plant.nickname.capitalize%></a> The <%=plant.common_name%> || <a href="/plants/<%=plant.id%>/edit">Edit Plant</a> || <a href= "/plants/<%=plant.id%>/delete">Delete Plant</a></li>

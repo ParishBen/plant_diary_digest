@@ -22,7 +22,7 @@
 </head>
 <body>
 <h1>Let's hear about your new plant!</h1>
-
+<%if flash[:plant_new_fail]%><h2><%=flash[:plant_new_fail]%></h2><%end%>
 <h4>P.S. Every Field Must Be Filled Out</h4>
 <form action="/plants" method="POST">
 <input type="text" name="common_name" placeholder="Plant Common-Name">

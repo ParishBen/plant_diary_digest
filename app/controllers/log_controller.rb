@@ -17,7 +17,8 @@ class LogController < ApplicationController
                      @log.save
                       redirect to "/plants/#{@plant.id}"
                 else 
-                   redirect '/log_failure'
+                   flash[:log_new_fail] = "Please ensure all fields are filled out"
+                   redirect '/plants/logs/new'
                 end 
         end
         
@@ -33,7 +34,8 @@ class LogController < ApplicationController
                     @conditions = ["Dead", "Far Worse", "Slightly Worse", "About the Same", "Slightly Livelier", "Much Healthier", "Healthiest Yet!"]
                     erb :'logs/edit'
                 else
-                   erb :'logs/log_failure'
+                   flash[:wrongful_log_edit] = "Sorry, You're not permitted to edit that Log."
+                   redirect '/account'
                 end
            end
     
@@ -41,13 +43,15 @@ class LogController < ApplicationController
              redirect_if_not_logged_in 
              @log = current_user.logs.find_by(:id => params[:id])
                 if  !@log
-                    erb :'logs/log_edit_fail'
+                  flash[:wrongful_log_edit] = "Sorry, You're not permitted to edit that Log."
+                  redirect '/account'
                 elsif @log && !params[:log].values.any?{|v| v.empty?} 
                     @plant = Plant.find(@log.plant_id)
                     @log.update(params[:log])  
                     redirect to "/plants/#{@plant.id}"
                 else
-                    erb :'logs/log_edit_fail'
+                    flash[:log_edit_fail] = "Please ensure all fields are filled out"
+                    redirect to "/logs/#{@log.id}/edit"
                       
                 end
             end
@@ -62,6 +66,7 @@ class LogController < ApplicationController
                    @plant = Plant.find(@log.plant_id)
                    erb :'logs/delete'
                 else 
+                   flash[:wrong_delete_path] = "That Log's Delete Path Forbidden"
                    redirect '/account'
                 end
            end
@@ -86,6 +91,7 @@ class LogController < ApplicationController
                       Log.destroy(params[:id])
                       redirect to "/plants/#{@plant.id}"
                   else
+                    flash[:wrongful_delete_attempt] = "You're not permitted to delete Log!"
                     redirect to "/account"
                   end
            end

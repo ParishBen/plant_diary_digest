@@ -16,7 +16,8 @@ class TipController < ApplicationController
           @tip.save
           redirect to '/account'
         else 
-          redirect to '/tips/failure'
+          flash[:new_tip_error] = "Sorry, ensure all fields are filled out"
+          redirect to '/tips/new'
        end
    end
 
@@ -30,6 +31,7 @@ class TipController < ApplicationController
       if @tip
         erb :'tips/edit'
       else 
+        flash[:wrongful_tip_edit] = "Sorry, you're not permitted to edit that."
         redirect '/account'
       end
     end
@@ -44,7 +46,8 @@ class TipController < ApplicationController
          @tip.update(params[:tip])
          redirect to '/account'
       else 
-        erb :'tips/tip_failure'
+        flash[:tip_edit_fail] = "Sorry, please ensure all fields are filled out!"
+        redirect to "/tips/#{@tip.id}/edit"
      end
   end
 
@@ -56,6 +59,7 @@ class TipController < ApplicationController
        if @tip
           erb :'tips/delete'
        else
+          flash[:wrongful_tip_delete] = "You can not delete that Tip."
           redirect to '/account'
        end
    end
@@ -67,7 +71,8 @@ class TipController < ApplicationController
          Tip.destroy(params[:id])
          redirect to '/account'
        elsif !@tip
-        erb :'tips/tip_failure'
+        flash[:delete_attempt] = "You're not permitted to delete that Tip"
+        redirect '/account'
       end
     end
 end

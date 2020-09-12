@@ -18,6 +18,7 @@
     </style>
 </head>
 <body>
+<%if flash[:signup_fail]%><h1><%= flash[:signup_fail] %></h1><%end%>
 <h1>Please Sign Up Below</h1>
 
 <form action='/signup' method="POST">

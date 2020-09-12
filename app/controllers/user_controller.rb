@@ -28,7 +28,8 @@ class UserController < ApplicationController
               elsif  User.find_by(:email => params[:email])
                 erb :'users/email_error'
          else
-           redirect '/failure'
+           flash[:signup_fail] = "Sorry, please ensure all fields are filled out!"
+           redirect '/signup'
          end
        end
      
@@ -43,7 +44,8 @@ class UserController < ApplicationController
             session[:user_id] = @user.id
             redirect to '/account'
           else
-            redirect '/failure'
+            flash[:login_fail] = "Sorry we couldn't verify you, Please try again!"
+            redirect '/login'
          end
       end
       

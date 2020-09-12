@@ -5,6 +5,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, "public/stylesheets"
     enable :sessions 
     set :session_secret, ENV['SESSION_SECRET']
+    register Sinatra::Flash
   end
  
   get '/' do

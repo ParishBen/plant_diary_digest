@@ -18,6 +18,7 @@
     </style>
 </head>
 <body>
+<%if flash[:log_edit_fail]%><h1><%=flash[:log_edit_fail]%></h1><br><%end%>
 <h1>Edit <%if @plant.nickname.ends_with?("s")%> <%=@plant.nickname.to_s.capitalize%>' Log <%else%> <%=@plant.nickname.to_s.capitalize%>'s Log</h1><%end%>
 
 <form action="/logs/<%=@log.id%>" method="post">
