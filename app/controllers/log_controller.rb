@@ -26,8 +26,8 @@ class LogController < ApplicationController
            end
 
            get '/logs/:id/edit' do
-             @log = current_user.logs.find_by(:id => params[:id])
-              redirect_if_not_logged_in
+            redirect_if_not_logged_in
+            @log = current_user.logs.find_by(:id => params[:id])
                 if @log
                     @plant = Plant.find(@log.plant_id)
                     @conditions = ["Dead", "Far Worse", "Slightly Worse", "About the Same", "Slightly Livelier", "Much Healthier", "Healthiest Yet!"]
@@ -38,26 +38,26 @@ class LogController < ApplicationController
            end
     
            patch "/logs/:id" do
+             redirect_if_not_logged_in 
              @log = current_user.logs.find_by(:id => params[:id])
-               redirect_if_not_logged_in  
-                if logged_in? && !@log
-                    redirect to '/account'
-                elsif @log 
+                if  !@log
+                    erb :'logs/log_edit_fail'
+                elsif @log && !params[:log].values.any?{|v| v.empty?} 
                     @plant = Plant.find(@log.plant_id)
-                      if @log && !params[:log].values.any?{|v| v.empty?} 
-                        @log.update(params[:log])  
-                        redirect to "/plants/#{@plant.id}"
-                      else
-                        erb :'logs/log_edit_fail'
-                      end
+                    @log.update(params[:log])  
+                    redirect to "/plants/#{@plant.id}"
+                else
+                    erb :'logs/log_edit_fail'
+                      
                 end
             end
             
         
     
            get '/logs/:id' do
+            redirect_if_not_logged_in
             @log = current_user.logs.find_by(:id => params[:id])
-              redirect_if_not_logged_in
+              
                 if @log
                    @plant = Plant.find(@log.plant_id)
                    erb :'logs/delete'
@@ -68,20 +68,19 @@ class LogController < ApplicationController
         
            
            get '/plants/logs/:id' do 
-            @plant = Plant.find_by(:id=>params[:id])
-            @plants = current_user.plants.find_by(:id=> @plant.id)
-                if !logged_in? || !@plants
-                   erb :'plants/other_show'
-                elsif @plants
+            @plant = Plant.find_by(:id=> params[:id])
+              if !logged_in?
+                erb :'plants/other_show'
+              elsif @plants = current_user.plants.find_by(:id=> @plant.id)
                    erb :'plants/show'
-                else
+              else
                    erb :'plants/other_show'
                 end
             end
 
            delete "/logs/:id" do
-            @log = current_user.logs.find_by(:id => params[:id])
-                redirect_if_not_logged_in
+            redirect_if_not_logged_in
+            @log = current_user.logs.find_by(:id => params[:id]) 
                   if @log
                     @plant = Plant.find(@log.plant_id)
                       Log.destroy(params[:id])

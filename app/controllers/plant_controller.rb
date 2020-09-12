@@ -7,8 +7,9 @@ class PlantController < ApplicationController
 
 
     post '/plants' do
+       redirect_if_not_logged_in
        @plant= Plant.new(:common_name=> params[:common_name], :plant_type=> params[:plant_type], :nickname=> params[:nickname], :user_id=> params[:user_id])
-        if logged_in? && !params[:nickname].empty? && !params[:common_name].empty? && !params[:plant_type].empty?
+        if !params[:nickname].empty? && !params[:common_name].empty? && !params[:plant_type].empty?
             @plant.user_id = current_user.id
              @plant.save
               redirect to '/account'
@@ -31,40 +32,41 @@ class PlantController < ApplicationController
          @plant = Plant.find_by(:id=> params[:id])
             if !logged_in? 
                 erb :'plants/other_show'
-            elsif @plants = current_user.plants.find_by(:id=>@plant.id)  
+            elsif @plants = current_user.plants.find_by(:id=> @plant.id)  
                 erb :'plants/show'
             else
                 erb :'plants/other_show'
-        end
+            end
     end
 
     get '/plants/:id/edit' do
-        @plant= current_user.plants.find_by(:id=>@params[:id])
-          redirect_if_not_logged_in
-           if @plant 
-            erb :'plants/edit'
+      redirect_if_not_logged_in
+      @plant= current_user.plants.find_by(:id=> params[:id])
+        if @plant 
+          erb :'plants/edit'
            else
             redirect to '/account'
         end
      end
 
     patch '/plants/:id' do
-        @plant= current_user.plants.find_by(:id=>@params[:id])
-        if @plant && !params[:plant].values.any?{|v| v.empty?}
+        redirect_if_not_logged_in
+        @plant= current_user.plants.find_by(:id => params[:id])
+          if @plant && !params[:plant].values.any?{|v| v.empty?}
             @plant.update(params[:plant])
             redirect to "/plants"
-        else
+          else
             erb :'plants/plant_failure'
-        end
+          end
     end
     
     get '/plants/:id/delete' do
-        @plant= current_user.plants.find_by(:id=>@params[:id])
-          redirect_if_not_logged_in
+        redirect_if_not_logged_in
+        @plant= current_user.plants.find_by(:id => params[:id]) 
             if @plant
               erb :'plants/delete'
             else redirect '/account'
-           end
+            end
     end
     
 
@@ -72,8 +74,8 @@ class PlantController < ApplicationController
 
 
     delete "/plants/:id" do
-        @plant = current_user.plants.find_by(:id=>params[:id])
-          redirect_if_not_logged_in
+        redirect_if_not_logged_in
+        @plant = current_user.plants.find_by(:id=> params[:id])
            if @plant
              Plant.destroy(params[:id])
              redirect to "/plants"

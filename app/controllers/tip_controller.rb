@@ -1,16 +1,16 @@
 class TipController < ApplicationController
   get '/tips/new' do
-    @user = current_user
-      if @user
+    redirect_if_not_logged_in
+    if @user = current_user
         erb :'tips/new'
-      else
+    else
         erb :'users/failure'
      end
   end
   
   post '/tips' do
-    @tip = Tip.new(:plant_type=> params["plant_type"], :content=> params["content"])    
-      redirect_if_not_logged_in
+   redirect_if_not_logged_in 
+   @tip = Tip.new(:plant_type=> params["plant_type"], :content=> params["content"])    
         if !@tip.content.empty? && !@tip.plant_type.empty?
           @tip.user_id = current_user.id
           @tip.save
@@ -25,19 +25,20 @@ class TipController < ApplicationController
   end
 
   get '/tips/:id/edit' do
+    redirect_if_not_logged_in
     @tip= current_user.tips.find_by(:id=> params[:id])
-       redirect_if_not_logged_in
-         if @tip
-            erb :'tips/edit'
-         else 
-            redirect '/account'
-        end
+      if @tip
+        erb :'tips/edit'
+      else 
+        redirect '/account'
+      end
     end
      
      
   
 
   patch '/tips/:id' do
+    redirect_if_not_logged_in
     @tip= current_user.tips.find_by(:id=> params[:id])
       if @tip && !params[:tip].values.any?{|v| v.empty?} 
          @tip.update(params[:tip])
@@ -50,18 +51,18 @@ class TipController < ApplicationController
 
 
   get '/tips/:id/delete' do
+    redirect_if_not_logged_in
     @tip= current_user.tips.find_by(:id=> params[:id])     
-      redirect_if_not_logged_in
-        if @tip
+       if @tip
           erb :'tips/delete'
-        else
+       else
           redirect to '/account'
        end
    end
 
   delete '/tips/:id' do
+    redirect_if_not_logged_in
     @tip= current_user.tips.find_by(:id=> params[:id])
-      redirect_if_not_logged_in
        if @tip
          Tip.destroy(params[:id])
          redirect to '/account'
